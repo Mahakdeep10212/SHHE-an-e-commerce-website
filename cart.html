@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Home Essentials Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #090909;
+        }
+        header {
+            background-color: #d43030;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+        }
+        #cart-items {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(128, 110, 110, 0.1);
+            max-width: 700px;
+            margin: auto;
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+        }
+        #cart-list {
+            margin-top: 30px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        .cart-item img {
+            width: 40px;
+            height: auto;
+            border-radius: 4px;
+        }
+        .cart-item-details {
+            flex: 1;
+            padding: 0 10px;
+        }
+        .cart-item-title {
+            font-size: 1.3em;
+            margin: 0;
+        }
+        .cart-item-price {
+            font-weight: bold;
+            color: #d43030;
+        }
+        .checkout-button {
+            width: 100%;
+            background-color: #d43030;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+        .checkout-button:hover {
+            background-color:#d43030 ;
+            
+            
+        }
+        .total-price {
+            text-align: right;
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight:bolder;
+            color: #d43030;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <section id="cart-items">
+        <h2>Items in Cart</h2>
+        <div id="cart-list"></div>
+        <div class="total-price" id="total-price">$0.00</div>
+        <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
+    </section>
+
+    <script>
+        // Sample Cart Data
+        const cartItems = [
+            { id: 1, name: "Cozy Blanket", price: 29.99, image: "blankets.jpeg", quantity: 2 },
+            { id: 2, name: "Elegant Curtains", price: 39.99, image: "curtain.jpeg", quantity: 1 },
+            { id: 3, name: "Luxury Bed Sheet", price: 49.99, image: "bedsheet.jpeg", quantity: 1 }
+        ];
+
+        // Load Cart Items Dynamically
+        function loadCartItems() {
+            const cartList = document.getElementById("cart-list");
+            const totalPriceElement = document.getElementById("total-price");
+            let total = 0;
+
+            cartList.innerHTML = ""; // Clear previous items
+
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItemDiv = document.createElement("div");
+                cartItemDiv.classList.add("cart-item");
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${item.name} (x${item.quantity})</h3>
+                        <p class="cart-item-price">$${itemTotal.toFixed(2)}</p>
+                    </div>
+                `;
+                cartList.appendChild(cartItemDiv);
+            });
+
+            totalPriceElement.innerText = `$${total.toFixed(2)}`;
+            document.getElementById("cart-count").innerText = cartItems.length; // Update cart count
+        }
+
+        function checkout() {
+            alert("Proceeding to checkout...");
+            // Implement checkout logic here
+        }
+
+        // Initialize Page
+        document.addEventListener("DOMContentLoaded", loadCartItems);
+    </script>
+</body>
+</html>

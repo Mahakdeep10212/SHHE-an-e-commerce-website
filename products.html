@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Home Essentials Store / Sonu Handloom</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0c0c;
+    }
+    header {
+      background-color: #de2e2e;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+    }
+    .product-filters {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      background-color: #f7eef6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .product-list, .featured-product-list {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      justify-content: center;
+    }
+    .product-card, .product {
+      background: rgb(226, 234, 228);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .product-card:hover, .product:hover {
+      transform: scale(1.05);
+    }
+    .product-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .product-title {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    .product-price {
+      color: #de2f2f;
+      font-weight: bold;
+    }
+    .add-to-cart {
+      background-color: #de2f2f;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .add-to-cart:hover {
+      background-color: #de2f2f;
+    }
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+    }
+    .carousel-slide {
+      display: none;
+    }
+    .carousel-slide.active {
+      display: block;
+    }
+    .carousel img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color:#de2f2f;
+      color: white;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Products</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <section class="product-filters">
+    <label for="category-filter">Category:</label>
+    <select id="category-filter">
+      <option value="all">All</option>
+      <option value="blankets">Blankets</option>
+      <option value="curtains">Curtains</option>
+      <option value="bed-sheets">Bed Sheets</option>
+      <option value="doormats">Door Mats</option>
+      <option value="comforters">Comforters</option>
+    </select>
+
+    <label for="sort-price">Sort by Price:</label>
+    <select id="sort-price">
+      <option value="low-high">Low to High</option>
+      <option value="high-low">High to Low</option>
+    </select>
+  </section>
+
+  
+  <section class="featured-products">
+    <h2>Featured Products</h2>
+ 
+    <div class="featured-product-list" id="featured-product-list"></div>
+  </section>
+
+  <section class="product-list" id="product-list">
+    <div class="product-card" data-id="1">
+      <img src="blankets.jpeg" alt="Cozy Blanket" class="product-image">
+      <h2 class="product-title">Cozy Blanket</h2>
+      <p class="product-price">Rs. 3000</p>
+      <p class="product-description">Soft and warm, perfect for chilly nights.</p>
+      <button class="add-to-cart" onclick="addToCart(1)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-id="2">
+      <img src="curtain.jpeg" alt="Elegant Curtains" class="product-image">
+      <h2 class="product-title">Elegant Curtains</h2>
+      <p class="product-price">Rs. 340</p>
+      <p class="product-description">Stylish curtains to enhance your living space.</p>
+      <button class="add-to-cart" onclick="addToCart(2)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-id="3">
+      <img src="bedsheet.jpeg" alt="Luxury Bed Sheet" class="product-image">
+      <h2 class="product-title">Luxury Bed Sheet</h2>
+      <p class="product-price">Rs. 230</p>
+      <p class="product-description">Made from high-quality cotton for a comfortable sleep.</p>
+      <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
+    </div>
+   
+    <div class="product-card" data-id="5">
+      <img src="comforter.jpeg" alt="Warm Comforter" class="product-image">
+      <h2 class="product-title">Warm Comforter</h2>
+      <p class="product-price">Rs. 500</p>
+      <p class="product-description">Keep cozy with our soft comforters.</p>
+      <button class="add-to-cart" onclick="addToCart(5)">Add to Cart</button>
+    </div>
+    
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2024 Home Essentials Store/ sonu handloom | <a href="contact.html" style="color: white;">Contact Us</a></p>
+  </footer>
+
+  <script>
+    
+    const featuredProducts = [
+      { id: 1, name: "Blanket", price: 300, image: "nb.jpeg" },
+      { id: 2, name: "Curtain", price: 270, image: "nc.avif" },
+      { id: 3, name: "Bed Sheet", price:525, image: "nbs.jpeg" },
+      { id: 4, name: "Comforter", price: 740, image: "comforter.jpeg" }
+    ];
+
+    
+    function loadFeaturedProducts() {
+      const productGrid = document.getElementById("featured-product-list");
+      if (!productGrid) return;
+
+      productGrid.innerHTML = "";
+      featuredProducts.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product");
+        productDiv.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <h3 class="product-title">${product.name}</h3>
+          <p class="product-price">Rs. ${product.price}</p>
+          <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+        `;
+        productGrid.appendChild(productDiv);
+      });
+    }
+
+    // Carousel Functionality
+    let currentSlide = 0;
+    function showSlide(index) {
+      const slides = document.querySelectorAll(".carousel-slide");
+      slides.forEach(slide => slide.classList.remove("active"));
+      slides[index].classList.add("active");
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % document.querySelectorAll(".carousel-slide").length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3000);
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", () => {
+      loadFeaturedProducts();
+      showSlide(currentSlide);
+    });
+    
+    function addToCart(productId) {
+      // Implement add to cart functionality here
+      const cartCountElement = document.getElementById("cart-count");
+      let currentCount = parseInt(cartCountElement.innerText);
+      cartCountElement.innerText = currentCount + 1; // Increment cart count
+      alert(`Product ID ${productId} added to cart!`);
+    }
+  </script>
+</body>
+</html>
