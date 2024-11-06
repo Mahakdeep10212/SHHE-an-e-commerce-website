@@ -1,4 +1,4 @@
-// Sample Product Data for Featured Products
+
 const featuredProducts = [
     { id: 1, name: "Blanket", price: 30, image: "blankets.jpeg" },
     { id: 2, name: "Curtain", price: 20, image: "curtain.jpeg" },
@@ -6,7 +6,7 @@ const featuredProducts = [
     { id: 4, name: "Comforter", price: 40, image: "comforter.jpeg" }
 ];
 
-// Load Featured Products Dynamically
+
 function loadFeaturedProducts() {
     const productGrid = document.getElementById("featured-product-list");
     if (!productGrid) return;
@@ -25,7 +25,7 @@ function loadFeaturedProducts() {
     });
 }
 
-// Carousel Functionality
+
 let currentSlide = 0;
 function showSlide(index) {
     const slides = document.querySelectorAll(".carousel-slide");
@@ -40,7 +40,7 @@ function nextSlide() {
 
 setInterval(nextSlide, 3000);
 
-// Initialize Page
+
 document.addEventListener("DOMContentLoaded", () => {
     loadFeaturedProducts();
     showSlide(currentSlide);
